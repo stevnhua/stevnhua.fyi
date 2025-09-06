@@ -16,11 +16,8 @@ const EXPERIENCES: Experience[] = [
     company: "Scene+",
     role: "Incoming — Marketing Data Scientist",
     period: "September 2025 • Toronto, ON",
-    summary:
-      "",
-    bullets: [
-
-    ],
+    summary: "",
+    bullets: [],
     logoKey: "sceneplus",
   },
   {
@@ -191,60 +188,57 @@ export default function Hero() {
             }}
           />
           {/* header */}
-<header className="relative mx-auto max-w-7xl px-6 pt-20 md:pt-24">
-  {/* aurora glow behind */}
-  <div
-    aria-hidden
-    className="pointer-events-none absolute inset-x-0 -top-8 -z-10 mx-auto h-[20rem] w-[38rem] blur-3xl opacity-70"
-    style={{
-      background:
-        "radial-gradient(60% 60% at 30% 40%, rgba(37,99,235,.18), transparent 60%), radial-gradient(55% 55% at 70% 60%, rgba(59,130,246,.25), transparent 60%)",
-    }}
-  />
+          <header className="relative mx-auto max-w-7xl px-6 pt-20 md:pt-24">
+            {/* aurora glow behind */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 -top-8 -z-10 mx-auto h-[20rem] w-[38rem] blur-3xl opacity-70"
+              style={{
+                background:
+                  "radial-gradient(60% 60% at 30% 40%, rgba(37,99,235,.18), transparent 60%), radial-gradient(55% 55% at 70% 60%, rgba(59,130,246,.25), transparent 60%)",
+              }}
+            />
 
-  {/* stack everything centered with clean vertical rhythm */}
-  <div className="flex flex-col items-center text-center space-y-4">
+            {/* stack everything centered with clean vertical rhythm */}
+            <div className="flex flex-col items-center text-center space-y-4">
+              {/* headline */}
+              <motion.h1
+                whileHover={{ y: -2, scale: 1.015 }}
+                transition={{ type: "spring", stiffness: 320, damping: 22, mass: 0.35 }}
+                className="
+                  relative inline-block
+                  bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent
+                  text-balance text-[46px] font-extrabold leading-[1.05] tracking-tight
+                  md:text-6xl lg:text-7xl
+                  drop-shadow-[0_2px_24px_rgba(16,185,129,0.08)]
+                "
+              >
+                {"Companies I've worked with."}
+                {/* underline sweep (safe offset) */}
+                <span
+                  aria-hidden
+                  className="
+                    absolute left-1/2 bottom-[-14px] h-[2px] w-0 -translate-x-1/2
+                    bg-gradient-to-r from-blue-400 via-blue-500 to-sky-400
+                    transition-all duration-500 ease-out
+                    group-hover:w-full
+                  "
+                />
+              </motion.h1>
 
-    {/* headline */}
-    <motion.h1
-      whileHover={{ y: -2, scale: 1.015 }}
-      transition={{ type: "spring", stiffness: 320, damping: 22, mass: 0.35 }}
-      className="
-        relative inline-block
-        bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent
-        text-balance text-[46px] font-extrabold leading-[1.05] tracking-tight
-        md:text-6xl lg:text-7xl
-        drop-shadow-[0_2px_24px_rgba(16,185,129,0.08)]
-      "
-    >
-      Companies I've worked with.
-      {/* underline sweep (safe offset) */}
-      <span
-        aria-hidden
-        className="
-          absolute left-1/2 bottom-[-14px] h-[2px] w-0 -translate-x-1/2
-          bg-gradient-to-r from-blue-400 via-blue-500 to-sky-400
-          transition-all duration-500 ease-out
-          group-hover:w-full
-        "
-      />
-    </motion.h1>
-
-    {/* tiny skill chips */}
-    <div className="flex flex-wrap justify-center gap-2 pt-">
-      {["A/B testing", "Customer Segmentation", "SQL · Python · GCP", "Tableau · Looker"].map((t) => (
-        <span
-          key={t}
-          className="rounded-full border border-zinc-700/40 bg-black/40 px-3 py-1 text-[11px] text-zinc-300/90"
-        >
-          {t}
-        </span>
-      ))}
-    </div>
-  </div>
-</header>
-
-
+              {/* tiny skill chips */}
+              <div className="flex flex-wrap justify-center gap-2 pt-1">
+                {["A/B testing", "Customer Segmentation", "SQL · Python · GCP", "Tableau · Looker"].map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-zinc-700/40 bg-black/40 px-3 py-1 text-[11px] text-zinc-300/90"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </header>
 
           {/* timeline */}
           <div className="relative mt-20 md:mt-20">
@@ -287,7 +281,6 @@ export default function Hero() {
           <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-zinc-800/60">
             <div
               className="h-full bg-[#0047AB]/80 transition-[width] duration-150 ease-linear"
-
               style={{ width: `${progress * 100}%` }}
             />
           </div>
@@ -327,9 +320,6 @@ function Card({
         boxShadow: active
           ? "0 28px 90px rgba(0,0,0,.52), 0 0 0 1px rgba(0,71,171,.35) inset"
           : "0 16px 44px rgba(0,0,0,.40)",
-
-        
-
         transform: `scale(${scale})`,
         opacity,
         filter: `${blur} ${saturate}`,
@@ -344,8 +334,7 @@ function Card({
           className="pointer-events-none absolute -inset-4 rounded-[2rem] blur-2xl"
           style={{
             background:
-            "radial-gradient(24rem 14rem at 50% 35%, rgba(0,71,171,.25), transparent 60%)",          
-          
+              "radial-gradient(24rem 14rem at 50% 35%, rgba(0,71,171,.25), transparent 60%)",
           }}
         />
       )}

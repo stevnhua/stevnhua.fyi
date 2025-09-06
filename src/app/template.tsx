@@ -39,7 +39,7 @@ export default function RootTemplate({ children }: PropsWithChildren) {
       window.scrollTo(0, 0);
     }, 800);
     console.log('loading', isLoading);
-  }, []);
+  }, [isLoading]);
 
   return (
     <main className="min-h-screen overflow-x-hidden">
