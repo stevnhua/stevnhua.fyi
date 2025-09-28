@@ -1,93 +1,65 @@
-// src/components/animations/smoothScroll/body.tsx
-"use client";
-
-import React, { useLayoutEffect, useRef } from "react";
-import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useLayoutEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import gsap from 'gsap';
 
 gsap.registerPlugin(ScrollTrigger);
 
-type BodyItem = {
-  src: string;            // image filename under /public/images
-  color?: string;         // optional bg color
-};
-
-type BodyProps = {
-  body: BodyItem[];
-  selectedProject: number; // index into body[]
+export default function Body({
+  description,
+  text,
+  body
+}: {
   description: string;
   text: string;
-};
-
-export default function Body({ body, selectedProject, description, text }: BodyProps) {
+  body: { title: string; src: string }[];
+}) {
+  const [selectedProject, setSelectedProject] = useState(0);
   const container = useRef<HTMLDivElement>(null);
   const imageContainer = useRef<HTMLDivElement>(null);
   const projectList = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const mm = gsap.matchMedia();
-
-    // Desktop-only pinning; mobile uses sticky
-    mm.add("(min-width: 1024px)", () => {
-      const ctx = gsap.context(() => {
-        if (!imageContainer.current || !projectList.current) return;
-
-        ScrollTrigger.create({
-          trigger: imageContainer.current,
-          pin: true,
-          start: "top top",
-          end: () => `+=${Math.max(0, (projectList.current?.offsetHeight ?? 0) - 110)}`,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-          pinSpacing: true,
-        });
-      }, container);
-
-      // re-calc when fonts/layout settle (prevents drift)
-      (document as any).fonts?.ready?.then(() => ScrollTrigger.refresh());
-
-      return () => ctx.revert();
+    ScrollTrigger.create({
+      trigger: imageContainer.current,
+      pin: true,
+      start: 'top',
+      end: () => `+=${projectList.current?.offsetHeight! - 110}`
     });
-
-    return () => mm.revert();
   }, []);
 
-  const current = body[selectedProject] ?? body[0];
-
   return (
-    <section ref={container} className="relative w-full bg-background text-foreground">
-      <div className="mx-auto flex h-[300px] w-full justify-between gap-[5%] px-4 sm:h-[700px] lg:max-w-6xl lg:px-0">
-        {/* Image column */}
-        <div
-          ref={imageContainer}
-          className="
-            relative h-full w-[42%]
-            lg:w-[40%]
-            /* Mobile: sticky fallback (GSAP pin is desktop-only) */
-            sticky top-4 lg:static
-          "
-        >
+    <div ref={container} className="relative mt-[25vh] px-[10%] py-[10%]">
+      <div className="flex h-[300px] w-full justify-between gap-[5%] sm:h-[700px]">
+        <div ref={imageContainer} className="relative h-full w-[40%]">
           <Image
-            src={`/images/${current.src}`}
-            alt="Project visual"
+            src={`/images/${body[selectedProject].src}`}
             fill
-            priority={false}
-            sizes="(max-width: 1024px) 42vw, 40vw"
+            alt="project image"
+            priority
             className="object-cover"
           />
         </div>
-
-        {/* Text column */}
-        <div ref={projectList} className="flex w-[58%] flex-col lg:w-[60%]">
-          <div className="flex h-full pb-5 text-[1.7vh] text-foreground/90 sm:text-[1.6vw] lg:mix-blend-difference">
+        <div className="flex w-[60%] flex-col">
+          <div className="flex h-full pb-5 text-[1.7vh] text-background mix-blend-difference sm:text-[1.6vw]">
             <p>{description}</p>
           </div>
-          <div className="align flex h-full self-end text-[1.2vh] text-foreground/80 sm:w-[70%] sm:text-[1vw] lg:mix-blend-difference">
+          <div className="align flex h-full self-end text-[1.2vh] text-background mix-blend-difference sm:w-[70%] sm:text-[1vw]">
             <p>{text}</p>
           </div>
         </div>
       </div>
-    </section>
+      <div ref={projectList} className="relative mt-[200px] flex flex-col">
+        {body.map((project, index) => (
+          <div
+            key={index}
+            onMouseOver={() => setSelectedProject(index)}
+            className="flex w-full cursor-default justify-end border-b border-white text-[3vw] uppercase text-background mix-blend-difference"
+          >
+            <h2 className="my-[40px] mb-[20px]">{project.title}</h2>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
