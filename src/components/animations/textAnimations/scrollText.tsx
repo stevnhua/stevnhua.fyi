@@ -8,7 +8,7 @@ const i = 'I ';
 const creativity = 'turn ';
 const is = 'data ';
 const my = 'into ';
-const craft = 'decisions.';
+const craft = 'decisions';
 const sentence3 = 'abstract thinking is my passion';
 
 function getRandomSpeed() {
